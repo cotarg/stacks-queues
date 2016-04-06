@@ -4,11 +4,18 @@ class Stack
   end
   
   def pop
+  	@store.pop
   end
   
   def push(element)
+  	@store << element
   end
   
   def size
+  	@store.length
+  end
+
+  def empty?
+  	size == 0
   end
 end

@@ -22,22 +22,37 @@ require './Queue.rb'
 
 # pop num of employees from stack, return them to queue for hiring.
 
+# broken out into its own method so each method is only doing one thing.
 def die_roll
 	rand(1..6)
 end
 
-def hire(queue_of_candidates, number)
-	peeps_to_hire = number
-	employees = Stack.new()
 
-	while peeps_to_hire > 0 do
-		peeps_to_hire -= 1
-		employees.push(queue_of_candidates.dequeue)
+def hire(queue_of_candidates, stack_of_employees)
+	stack_of_employees.push(queue_of_candidates.dequeue) while stack_of_employees.length < 6 
+
+	stack_of_employees
+end
+
+def fire(stack_of_employees, queue_of_candidates)
+	peeps_to_fire = die_roll
+
+	while peeps_to_fire > 0
+		peeps_to_fire -= 1
+		queue_of_candidates.enqueue(stack_of_employees.pop)
 	end
 
-	employees
+	stack_of_employees
 end
 
-def fire(stack_of_employees)
-	
-end
+candidates = Queue.new
+candidates.enqueue("Ava")
+candidates.enqueue("Joan")
+candidates.enqueue("Olivia")
+candidates.enqueue("Claire")
+candidates.enqueue("Mellie")
+candidates.enqueue("Rebecca")
+candidates.enqueue("Mo")
+candidates.enqueue("Jessica")
+candidates.enqueue("Beverly")
+
